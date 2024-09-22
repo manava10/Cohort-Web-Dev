@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Linkdin
+    <div id="post"></div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function getRecentPost(){
+            console.log("Before sending request");
+            const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1")
+
+            document.getElementById("post").innerHTML=response.data.title;
+        }
+        getRecentPost();
+    </script> 
+</body>
+</html>
