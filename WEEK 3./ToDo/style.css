@@ -1,0 +1,37 @@
+
+.parentdiv{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;  
+}
+.inputbox{
+    width: 400px;
+    height: 40px;
+    margin-right: 10;
+    border-color: rgb(219, 133, 20);
+    border-radius: 20px;
+}
+.addbtn{
+    background-color: yellow;
+    border-color: orange;
+    
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+body{
+    background-color: antiquewhite;
+}
+
+.mainheader{
+    font-size: larger;
+    font-size: 25px;
+}
+.Firstdiv{
+    margin-left: 50px;
+    margin-top: 20px;
+}
+.ChildDiv{
+    display: flex;
+    justify-content: space-between;
+}
