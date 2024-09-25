@@ -5,6 +5,7 @@ const app = express()
 const jwt = require("jsonwebtoken")
 const JWT_SECRET = 'ilovekiara';
 const mongoose = require("mongoose")
+const {z} =require("zod");
 mongoose.connect("mongodb+srv://mmanav10:3GBRChpK5zDLLBTL@cluster0.nordt.mongodb.net/todo-collection1");
 
 
@@ -13,12 +14,35 @@ app.use(express.json())
 
 
 app.post("/signup",async (req,res)=>{
-    const {email} = req.body;
-    const {password} = req.body;
-    const {name} =req.body;
+
+    //Defining schema for Zod. This will validate our input
+    const requiredBody = z.object({
+        email : z.string().min(3).max(100).email(),
+        name : z.string(),
+        password: z.string()
+    })
+
+    // const parsedData = requiredBody.parse(req.body);
+    const parsedDataWithSuccess = requiredBody.safeParse(req.body);
+
+    if(!parsedDataWithSuccess.success){
+        res.json({
+            message : "Incorrect Format",
+            error : parsedDataWithSuccess.error
+        })
+        return
+    }
+    //If the signup incoming data is in correct format then only, code will be
+    //executed further, else return from above if condition with a message,
+
+
+    const {email, password, name} = req.body;
+    //The above line of code can also be refactored as
+    //const {email,password,name} = parsedDataWithSuccess.data;
+
+
 
     //For Hashing Password
-    
     const HashedPassword = await bcrypt.hash(password,10);
     console.log(HashedPassword);
     //We know that on email duplication during current account, out Server is Crashing.
@@ -34,8 +58,7 @@ app.post("/signup",async (req,res)=>{
     })
 })
 app.post("/signin",async (req,res)=>{
-    const {email} = req.body;
-    const {password} = req.body;
+    const {email, password} = req.body;
 
     const user = await UserModel.findOne({
         email:email
@@ -47,6 +70,7 @@ app.post("/signin",async (req,res)=>{
         return
 
     }
+
 
     const passwordMatch = await bcrypt.compare(password,user.password);
 
@@ -78,8 +102,6 @@ app.post("/todo",auth,async (req,res)=>{
     res.json({
         msg : "ToDo added"
     })
-
-
 })
 
 
