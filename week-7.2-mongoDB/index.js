@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken")
 const JWT_SECRET = 'ilovekiara';
 const mongoose = require("mongoose")
 const {z} =require("zod");
-mongoose.connect("mongodb+srv://mmanav10:3GBRChpK5zDLLBTL@cluster0.nordt.mongodb.net/todo-collection1");
+mongoose.connect("mongodb+srv://mmanav10:Ramayan123@cluster0.nordt.mongodb.net/todo-collection1");
 
 
 
@@ -132,8 +132,6 @@ function auth(req,res,next){
     }
 
 }
-
-
 const PORT = 8080;
 app.listen(PORT,()=>{
    console.log(`app is live at PORT ${PORT}`);
