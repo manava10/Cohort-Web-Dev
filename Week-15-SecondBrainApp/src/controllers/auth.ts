@@ -66,7 +66,8 @@ export const signIn = async(req:Request<{},{},authenticationBody>,res:Response):
                 const jwtToken = generateToken(payload);
                 res.json({
                     message:"Login successfull, JWT TOKEN has been successfully return with this.",
-                    jwtToken:jwtToken
+                    jwtToken:jwtToken,
+                    payload:payload
                 })
 
             }else{
@@ -84,7 +85,7 @@ export const signIn = async(req:Request<{},{},authenticationBody>,res:Response):
             })
             console.log(err.message);
         }else{
-            throw new Error("SomeError Occured");
+            throw new Error("SomeError Occurred");
         }
     }
 

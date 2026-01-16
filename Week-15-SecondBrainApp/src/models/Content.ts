@@ -1,15 +1,11 @@
-import mongoose,{Document,Schema} from 'mongoose';
-interface Icontent extends Document{
-    type : "document" | "tweet" | "youtube" |"link";
-    link : string;
-    "title" : string;
-    "tags" : string[]
-}
+import mongoose,{Schema} from 'mongoose';
+import {Icontent} from "../types/auth.types";
 
 const ContentSchema = new Schema({
     owner:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:true
     },
     type:{
         type:String,
